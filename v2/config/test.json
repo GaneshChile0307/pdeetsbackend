@@ -1,0 +1,29 @@
+{
+    "app": {
+        "port": 4000,
+        "timezone": "Europe/Berlin"
+    },
+    "modules": {
+        "patient": {
+            "tokens": {
+                "access_token": {
+                    "exp_time": "1d"
+                },
+                "refresh_token": {
+                    "exp_time": "30d"
+                }
+            },
+            "passwordResetCodeLength": 5
+        },
+        "reports": {
+            "lab": {
+                "upload_location": "public/reports/lab",
+                "max_allowed_report_size": "2000000",
+                "allowed_file_types": ["jpeg", "png", "jpg", "pdf"]
+            }
+        }
+    },
+    "crons": {
+        "timezone": "Europe/Berlin"  
+    }
+}

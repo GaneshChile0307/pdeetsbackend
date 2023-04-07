@@ -1,0 +1,24 @@
+// loading .env file
+require('dotenv').config()
+require('../db/redis')
+
+const app = require('../app')
+const config = require('config')
+const database = require('../db')
+const { Settings } = require('luxon')
+
+Settings.defaultZone = config.get('crons.timezone')
+
+const port = process.env.PORT || config.get('app.port');
+
+(async () => {
+  database.isConnected().then(() => {
+    app.listen(port, () => {
+      console.log(`API Endpoint: ${process.env.HOST}:${process.env.PORT}/v2/`)
+      console.log(`Docs Endpoint: ${process.env.HOST}:${process.env.PORT}/v2/api-docs/`)
+    })
+  }).catch(() => {
+    console.log('Error while making connection with the database...')
+    console.log('Failed to start the server...')
+  })
+})()

@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  node-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+      - redis
+  
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: app_poc_db_v2
+  
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - "6379:6379"
